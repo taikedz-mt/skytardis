@@ -19,3 +19,17 @@ Now we just need to map the x,z chunks where single land structure can be placed
 I'll think about that one later.
 
 Does this make sense....? It's mainly a stream of consciousness....
+
+==============================
+
+2016-11-26
+
+Notes in CDG
+
+* Detecting sky buildings - we need to do this, because we can't rely on the presence of a land marking or saved table to determine whether a corresponding sky building exists. This should rely on map existence, not any other fator
+
+* (x,z) on land mapping to (x,y,z) in sky - this is going to be a bit of a puzzler...
+
+* voxelmanip on unloaded chunk - should be possible, check how nether does it?
+
+* sky structures need an owner on its key node, to determine if the placer is indeed allowed to place there
