@@ -1,0 +1,21 @@
+Yes, 1500 blocks should work, thanks paramat!
+
+I'm thinking that a sky structure should be around 32*64*32 in size (will be a schem - mostly empty space bounded by unbreakable walls/ceiling/floor), and aligned to map blocks (16*16*16? I am reasoning along this line anyway) (this translates to being 2*4*2 blocks in size, which should be plenty "big" for a house!) -- the land structure would simply be symbolic and could be just 1 node in x/z and 2 nodes in y.
+
+The mapping would this be, for any 2*2 block map area, a 2*2 block area in the sky is set aside for it starting at y=31000 and going up for another 1500 nodes
+
+This would mean a sky structure would take up 64 nodes in height, which allows 23 sky structures to map over the same 2*2 blocks expanse on the ground -- which means for example that within a land area of (0,0 to 32,32) there can be at most 23 land structures.
+
+These need to be evenly spaced out... sqrt(23) =~ 4.7 - there can be 4.7 land structures along the x axis and 4.7 along the z axis of the map -
+If we are operating on a 32*32 space, that means 32/4.7 =~ 6.8, which means spacing out the land structures in approximate 6*6 land grab areas (now with n=6)..... with the 0.7n space being an area of 0.7n*1n for the extra few, and the very last slot being actually 0.7n*0.7n? I need to diagram this...
+
+
+So it seems they don't have to be too far apart, in a 2d plane. Detecting placement of new land structures is trickier - but it might have to simply be, when a door is placed, the corresponding map area is checked - if it finds a sky structure already there, then denied, unless somehow we can detect that the sky structure does belong to the person placing the door.
+
+This assumes we can do getnode() and/or voxelmanip on an onloaded and un-generated map chunk....
+
+Now we just need to map the x,z chunks where single land structure can be placed, to the sky structure's starting y would be.
+
+I'll think about that one later.
+
+Does this make sense....? It's mainly a stream of consciousness....
