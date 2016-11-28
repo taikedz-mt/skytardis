@@ -1,6 +1,6 @@
 -- Create the sky buldings, check for them
 
-function littlebig:setSkyStructureAt(skyx, skyy, skyz)
+function littlebig:setSkyStructureAt(skypos)
 	-- load a vmanip for the coords
 	-- load a sky structure schematic into the vmanip
 end
