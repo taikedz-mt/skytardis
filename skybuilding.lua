@@ -1,9 +1,26 @@
 -- Create the sky buldings, check for them
 
-function littlebig:setSkyStructureAt(skypos)
-	-- load a vmanip for the coords
-	-- load a sky structure schematic into the vmanip
+function littlebig:checkOwnerAt(pos,owner)
+	local tellermeta = minetest.get_meta(pos)
+	local knownowner = tellermeta.get_string("owner")
+	if knownowner and knownowner ~= owner then
+		return false
+	end
+	return true
 end
+
+function littlebig:setOwnerAt(pos,owner)
+	local tellermeta = minetest.get_meta(pos)
+	local knownowner = tellermeta.get_string("owner")
+	if not littlebig:checkOwnerAt(pos,owner) then
+		return false
+	end
+
+	tellermeta.set_string("owner",owner)
+	return true
+end
+
+--------------------------------------------- getting
 
 function littlebig:getSkyBoundsFor(landx,landz)
 	local bounds = littlebig:derive_blockbounds(landx,landz)
@@ -31,26 +48,13 @@ function littlebig:getSkyStructureFor(landx, landz)
 	-- or nil if nothing appropriate was found
 end
 
-function littlebig:checkOwnerAt(pos,owner)
-	local tellermeta = minetest.get_meta(pos)
-	local knownowner = tellermeta.get_string("owner")
-	if knownowner and knownowner ~= owner then
-		return false
-	end
-	return true
+----------------------------------------------------- setting
+
+function littlebig:setSkyStructureAt(skypos)
+	-- TODO -- load schematic
+	-- load a vmanip for the coords
+	-- load a sky structure schematic into the vmanip
 end
-
-function littlebig:setOwnerAt(pos,owner)
-	local tellermeta = minetest.get_meta(pos)
-	local knownowner = tellermeta.get_string("owner")
-	if not littlebig:checkOwnerAt(pos,owner) then
-		return false
-	end
-
-	tellermeta.set_string("owner",owner)
-	return true
-end
-
 
 function littlebig:setSkyStructureFor(landx, landz, owner)
 	local bounds = littlebig:getSkyBoundsFor(landx,landz)
@@ -61,12 +65,14 @@ function littlebig:setSkyStructureFor(landx, landz, owner)
 
 	-- check owner
 	if not littlebig:checkOwnerAt(bounds.pos1,owner) then
-		minetest.chat_send_player(owner,"ABORT - your pocket dimension interfere's iwth that of "..knownowner)
+		minetest.chat_send_player(owner,"ABORT - your pocket dimension interferes with that of "..knownowner)
 		return false
 	end
 
-	-- TODO -- load schematic
-	littlebig:setSkyStructureAt(bounds.pos1) -- takes care of file opening etc
+	if littlebig:setSkyStructureAt(bounds.pos1) then -- takes care of file opening etc
+		minetest.chat_send_player(owner,"Could not create sky structure")
+		minetest.log("error","Could not set sky structure at "..minetest.pos_to_string(nounds.pos1).." for "..owner)
+	end
 
 	if not littlebig:setOwnerAt(bounds.pos1,owner) then
 		minetest.chat_send_player(owner,"Could not set owner !")
@@ -75,9 +81,4 @@ function littlebig:setSkyStructureFor(landx, landz, owner)
 		return false
 	end
 	return true
-end
-
-function littlebig:getSkyStructureAt(skypos)
-	-- given a sky position, find the relevant info node
-	-- return the sky structure info
 end
