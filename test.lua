@@ -1,4 +1,4 @@
-littlebig = {}
+skytardis = {}
 minetest = {}
 
 function minetest.debug(arg)
@@ -29,8 +29,8 @@ end
 dofile("coordmapping.lua")
 
 function giveme(x,z)
-local y = littlebig.derive_altitude(x,z)
-local bounds = littlebig.derive_blockbounds(x,z)
+local y = skytardis.derive_altitude(x,z)
+local bounds = skytardis.derive_blockbounds(x,z)
 print("For "..tostring(x)..","..tostring(z).." we go to:\t"..tostring(y) .. " -> "..tostring(y+64).." / "..dump(bounds))
 end
 

@@ -10,7 +10,7 @@ local mathround = function(x)
 	return fx+1
 end
 
-function littlebig.derive_blockbounds(x,z)
+function skytardis.derive_blockbounds(x,z)
 	-- returns bounds x1,z1 / x2,z2 for a given point
 	local w = 32 -- width of the blockspace, in nodes
 
@@ -36,7 +36,7 @@ function littlebig.derive_blockbounds(x,z)
 	}
 end
 
-function littlebig.derive_altitude(x,z)
+function skytardis.derive_altitude(x,z)
 	-- returns an altitude which will be added to 31000 as the position of the skystructure
 	-- no two returned altitiudes can be within a value of 64 from eachother
 
@@ -67,3 +67,6 @@ function littlebig.derive_altitude(x,z)
 	return yalt
 end
 
+function skytardis.getBoundsAround(pos)
+	-- get sky structure boundaries given a sky position
+end
