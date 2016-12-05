@@ -27,7 +27,7 @@ minetest.register_node("skytardis:tardiswood",{
 
 		local metaraw = minetest.deserialize( itemstack:get_metadata() )
 		if not metaraw then
-			skytardis:setSkyStructureFor(pos.x, pos.z, placer)
+			skytardis:setSkyStructureFor(pos.x, pos.z, placer:get_player_name() )
 
 			metaraw = skytardis:getSkyStructureFor(pos.x, pos.z)
 
@@ -64,3 +64,4 @@ minetest.register_node("skytardis:tardisstone",{
 	light_propagates = true,
 	sunlight_propagates = true,
 })
+
