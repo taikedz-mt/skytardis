@@ -67,6 +67,13 @@ function skytardis:derive_altitude(x,z)
 	return yalt
 end
 
-function skytardis:getBoundsAround(pos)
+function skytardis:getBoundsAt(skypos)
 	-- get sky structure boundaries given a sky position
+	local bounds = skytardis:derive_blockbounds(skypos.x, skypos.z)
+	local ty = skypos.y - skytardis.base_altitude
+
+	bounds.pos1.y = ty - (ty % 64)
+	bounds.pos2.y = bounds.pos1.y + 64
+
+	return bounds
 end
