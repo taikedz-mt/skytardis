@@ -24,11 +24,10 @@ end
 
 function skytardis:getSkyBoundsFor(landx,landz)
 	local bounds = skytardis:derive_blockbounds(landx,landz)
-	local base_altitude = 100 -- in prod, should be 31000
 	local increment = skytardis:derive_altitude(landx,landz)
 
-	bounds.pos1.y = base_altitude + increment
-	bounds.pos2.y = base_altitude + increment
+	bounds.pos1.y = skytardis.base_altitude + increment
+	bounds.pos2.y = skytardis.base_altitude + increment
 
 	return bounds
 end
