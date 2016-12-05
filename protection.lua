@@ -4,8 +4,11 @@
 
 local oldprotect = minetest.is_protected
 
-local tardisprotect = function(pos,owner)
-	local tardisbounds = skytardis:getBoundsAt(pos)
+local tardisprotect = function(pos,owner) -- owner is string?
+	local bounds = skytardis:getBoundsAt(pos)
+	if skytardis:checkOwner(bounds.pos1,owner) then
+		return true
+	end
 
 	-- pass it on
 	return oldprotect(pos,owner)
