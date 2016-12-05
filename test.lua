@@ -29,9 +29,9 @@ end
 dofile("coordmapping.lua")
 
 function giveme(x,z)
-local y = skytardis.derive_altitude(x,z)
-local bounds = skytardis.derive_blockbounds(x,z)
-print("For "..tostring(x)..","..tostring(z).." we go to:\t"..tostring(y) .. " -> "..tostring(y+64).." / "..dump(bounds))
+	local y = skytardis:derive_altitude(x,z)
+	local bounds = skytardis:derive_blockbounds(x,z)
+	print("For "..tostring(x)..","..tostring(z).." we go to:\t"..tostring(y) .. " -> "..tostring(y+64).." / "..dump(bounds))
 end
 
 local testspots = {
